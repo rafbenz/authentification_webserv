@@ -6,12 +6,20 @@ const userService = require('./user.service');
 router.post('/authenticate', authenticate);
 router.post('/register', register);
 router.get('/', getAll);
+router.get('/sendsms', sendsms);
 router.get('/current', getCurrent);
 router.get('/:id', getById);
 router.put('/:id', update);
 router.delete('/:id', _delete);
 
 module.exports = router;
+function sendsms(req,res,next){
+    const Client = require('authy-client').Client;
+	const authy = new Client({key: "6f1238f29d75a840adea3f5a1cce651a"});
+	const enums = require('authy-client').enums;
+	 return authy.startPhoneVerification({ countryCode:  "ca", locale:  "fr", phone:  req.body.phoneNumber, via: enums.verificationVia.SMS });
+	
+}
 
 function authenticate(req, res, next) {
     userService.authenticate(req.body)

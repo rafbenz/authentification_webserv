@@ -28,7 +28,7 @@ function verifysmsCode(req,res,next){
     const Client = require('authy-client').Client;
        const authy = new Client({key: "WtaHZrQBNmlUkaUWwCxmpZV5oblKBQTo"});
        const enums = require('authy-client').enums;
-       const responseSms = authy.verifyPhone({ countryCode: req.body.countrycode, phone: req.body.phoneNumber, token: req.body.smsCode });
+       const responseSms = authy.verifyPhone({ countryCode: req.body.countryCode, phone: req.body.phoneNumber, token: req.body.smsCode });
        return res.send(responseSms);
    }
 

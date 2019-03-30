@@ -17,8 +17,8 @@ function sendsms(req,res,next){
     const Client = require('authy-client').Client;
 	const authy = new Client({key: "6f1238f29d75a840adea3f5a1cce651a"});
 	const enums = require('authy-client').enums;
-	 return authy.startPhoneVerification({ countryCode:  "ca", locale:  "fr", phone:  req.body.phoneNumber, via: enums.verificationVia.SMS });
-	
+	const response = await authy.startPhoneVerification({ countryCode:"CA", locale:"fr", phone:req.body.phoneNumber, via: enums.verificationVia.SMS });
+
 }
 
 function authenticate(req, res, next) {

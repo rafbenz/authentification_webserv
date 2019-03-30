@@ -14,11 +14,12 @@ router.delete('/:id', _delete);
 
 module.exports = router;
 function sendsms(req,res,next){
-    const Client = require('authy-client').Client;
+   /* const Client = require('authy-client').Client;
 	const authy = new Client({key: "6f1238f29d75a840adea3f5a1cce651a"});
 	const enums = require('authy-client').enums;
 	const response = await authy.startPhoneVerification({ countryCode:"CA", locale:"fr", phone:req.body.phoneNumber, via: enums.verificationVia.SMS });
-
+*/
+return res.send('Received a POST HTTP method');
 }
 
 function authenticate(req, res, next) {

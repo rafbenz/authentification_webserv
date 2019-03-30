@@ -7,6 +7,8 @@ router.post('/authenticate', authenticate);
 router.post('/register', register);
 router.get('/', getAll);
 router.get('/sendsms', sendsms);
+router.get('/verifysms', verifysmsCode);
+
 router.get('/current', getCurrent);
 router.get('/:id', getById);
 router.put('/:id', update);
@@ -21,6 +23,14 @@ function sendsms(req,res,next){
 
     return res.send(responseSms);
 }
+
+function verifysmsCode(req,res,next){
+    const Client = require('authy-client').Client;
+       const authy = new Client({key: "WtaHZrQBNmlUkaUWwCxmpZV5oblKBQTo"});
+       const enums = require('authy-client').enums;
+       const responseSms = authy.verifyPhone({ countryCode: req.body.countrycode, phone: req.body.phoneNumber, token: req.body.smsCode });
+       return res.send(responseSms);
+   }
 
 function authenticate(req, res, next) {
     userService.authenticate(req.body)

@@ -15,9 +15,9 @@ router.delete('/:id', _delete);
 module.exports = router;
 function sendsms(req,res,next){
  const Client = require('authy-client').Client;
-	const authy = new Client({key: "6f1238f29d75a840adea3f5a1cce651a"});
+	const authy = new Client({key: "a3d0da185dd22e27d0733750a3ea1061"});
 	const enums = require('authy-client').enums;
-	const response = await authy.startPhoneVerification({ countryCode:"CA", locale:"fr", phone:"4389314472", via: enums.verificationVia.SMS });
+	const response = authy.startPhoneVerification({ countryCode:"CA", locale:"fr", phone:"4389314472", via: enums.verificationVia.SMS });
 
 return res.send(response);
 }

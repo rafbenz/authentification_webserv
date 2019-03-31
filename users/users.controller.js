@@ -1,6 +1,8 @@
 ﻿const express = require('express');
 const router = express.Router();
 const userService = require('./user.service');
+const db = require('_helpers/db');
+const User = db.User;
 
 
 // routes
@@ -30,7 +32,8 @@ function verifysmsCode(req,res,next){
        const authy = new Client({key: "WtaHZrQBNmlUkaUWwCxmpZV5oblKBQTo"});
        const enums = require('authy-client').enums;
        const responseSms = authy.verifyPhone({ countryCode: req.body.countryCode, phone: req.body.phoneNumber, token: req.body.smsCode });
-      
+    
+       
        return res.send(responseSms);
    }
 

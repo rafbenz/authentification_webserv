@@ -45,9 +45,6 @@ async function verifysmsCode(req,res,next){
          {
              return res.status(400).json({ message: 'User not found' });
          }
-       }else
-       {
-        return res.status(400).json({ message: responseSms.rejectionReason.message });
        }
 
        return res.send(responseSms);

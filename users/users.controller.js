@@ -33,9 +33,9 @@ async function verifysmsCode(req,res,next){
        const enums = require('authy-client').enums;
        const responseSms = authy.verifyPhone({ countryCode: req.body.countryCode, phone: req.body.phoneNumber, token: req.body.smsCode });
       
-
+       const user=await User.findOne({ phoneNumber: req.body.phoneNumber });
        if (!responseSms.rejectionReason){
-        const user=await User.findOne({ phoneNumber: req.body.phoneNumber });
+       
         if (user) {
             user.verified = true;
             user.save();

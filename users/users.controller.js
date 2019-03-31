@@ -35,7 +35,7 @@ async function verifysmsCode(req,res,next){
       
        const user=await User.findOne({ phoneNumber: req.body.phoneNumber });
        
-       if (!responseSms.rejectionReason){
+       if (!responseSms.isRejected){
        
         if (user) {
             user.verified = true;

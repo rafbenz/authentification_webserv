@@ -34,7 +34,8 @@ async function verifysmsCode(req,res,next){
        const responseSms = authy.verifyPhone({ countryCode: req.body.countryCode, phone: req.body.phoneNumber, token: req.body.smsCode });
       
        const user=await User.findOne({ phoneNumber: req.body.phoneNumber });
-       if (!responseSms.rejectionReason){
+       return res.send(responseSms);
+       /*if (!responseSms.rejectionReason){
        
         if (user) {
             user.verified = true;
@@ -47,12 +48,12 @@ async function verifysmsCode(req,res,next){
        }else
        {
         return res.status(400).json({ message: responseSms.rejectionReason.message });
-       }
+       }*/
 
       
 
        
-       return res.send(responseSms);
+       
    }
 
 function authenticate(req, res, next) {

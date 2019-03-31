@@ -27,13 +27,22 @@ function sendsms(req,res,next){
     return res.send(responseSms);
 }
 
-function verifysmsCode(req,res,next){
+async function verifysmsCode(req,res,next){
     const Client = require('authy-client').Client;
        const authy = new Client({key: "WtaHZrQBNmlUkaUWwCxmpZV5oblKBQTo"});
        const enums = require('authy-client').enums;
        const responseSms = authy.verifyPhone({ countryCode: req.body.countryCode, phone: req.body.phoneNumber, token: req.body.smsCode });
        const user=await User.findOne({ phoneNumber: req.body.phoneNumber });
-       
+
+       if (user) {
+        user.verified = true;
+        user.save();
+    
+     }else
+     {
+         return res.status(400).json({ message: 'User not found' });
+     }
+
        
        return res.send(responseSms);
    }

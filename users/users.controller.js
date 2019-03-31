@@ -46,7 +46,7 @@ async function verifysmsCode(req,res,next){
          }
        }else
        {
-        res.status(400).json({ message: responseSms.rejectionReason.message });
+        return res.status(400).json({ message: responseSms.rejectionReason.message });
        }
 
       

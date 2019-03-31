@@ -1,8 +1,7 @@
 ﻿const express = require('express');
 const router = express.Router();
 const userService = require('./user.service');
-const db = require('_helpers/db');
-const User = db.User;
+
 
 // routes
 router.post('/authenticate', authenticate);
@@ -31,18 +30,7 @@ function verifysmsCode(req,res,next){
        const authy = new Client({key: "WtaHZrQBNmlUkaUWwCxmpZV5oblKBQTo"});
        const enums = require('authy-client').enums;
        const responseSms = authy.verifyPhone({ countryCode: req.body.countryCode, phone: req.body.phoneNumber, token: req.body.smsCode });
-       const user=await User.findOne({ phoneNumber: req.body.phoneNumber });
-       
-       
-       if (user) {
-           user.verified = true;
-           user.save();
-       
-        }else
-        {
-            return res.send("user not found");
-        }
-       
+      
        return res.send(responseSms);
    }
 
